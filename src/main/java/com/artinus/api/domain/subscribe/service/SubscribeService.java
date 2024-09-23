@@ -2,8 +2,6 @@ package com.artinus.api.domain.subscribe.service;
 
 import com.artinus.api.domain.channel.entity.Channel;
 import com.artinus.api.domain.member.entity.Member;
-import com.artinus.api.domain.member.value.PhoneNumber;
-import com.artinus.api.domain.subscribe.dto.response.SubscribeLogResponse;
 import com.artinus.api.domain.subscribe.entity.Subscribe;
 import com.artinus.api.domain.subscribe.entity.SubscribeLog;
 import com.artinus.api.domain.subscribe.entity.SubscribePlan;
@@ -14,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import static com.artinus.api.global.exception.ExceptionCode.NOT_FOUND_ENTITY;
@@ -32,9 +28,9 @@ public class SubscribeService {
     public long subscribeNewOrUpgrade(Member member, Channel channel, SubscribePlan plan) {
         Subscribe subscribeOrNew = findSubscribeOrNew(member, channel);
         subscribeOrNew.upgrade(plan);
-        Subscribe savedSubscribe = save(subscribeOrNew);
+        Subscribe savedSubscribe = saveSubscribe(subscribeOrNew);
         SubscribeLog subscribeLog = SubscribeLog.fromSubscribe(savedSubscribe, plan);
-        record(subscribeLog);
+        recordSubscribeLog(subscribeLog);
         return savedSubscribe.getId();
     }
 
@@ -42,27 +38,10 @@ public class SubscribeService {
     public long unsubscribeOrDowngrade(Member member, Channel channel, SubscribePlan plan) {
         Subscribe findSubscribe = findSubscribeBy(member, channel);
         findSubscribe.downgrade(plan);
-        Subscribe savedSubscribe = save(findSubscribe);
+        Subscribe savedSubscribe = saveSubscribe(findSubscribe);
         SubscribeLog subscribeLog = SubscribeLog.fromUnsubscribe(savedSubscribe, plan);
-        record(subscribeLog);
+        recordSubscribeLog(subscribeLog);
         return savedSubscribe.getId();
-    }
-
-    public List<SubscribeLogResponse> getSubscribeLogsByPhoneNumber(String phoneNumber) {
-        return subscribeLogRepository.findByPhoneNumber(new PhoneNumber(phoneNumber))
-                .stream()
-                .map(SubscribeLogResponse::from)
-                .toList();
-    }
-
-    public List<SubscribeLogResponse> findChannelSubscribeLogs(long channelId, LocalDate date) {
-        return subscribeLogRepository.findByChannelBy(
-                channelId,
-                        date.atStartOfDay(),
-                        date.atTime(23, 59, 59))
-                .stream()
-                .map(SubscribeLogResponse::from)
-                .toList();
     }
 
     private Subscribe findSubscribeOrNew(Member member, Channel channel) {
@@ -74,11 +53,11 @@ public class SubscribeService {
                 .orElseThrow(() -> new ArtinusAppException(NOT_FOUND_ENTITY));
     }
 
-    private Subscribe save(Subscribe subscribe) {
+    private Subscribe saveSubscribe(Subscribe subscribe) {
         return subscribeRepository.save(subscribe);
     }
 
-    private void record(SubscribeLog subscribeLog) {
+    private void recordSubscribeLog(SubscribeLog subscribeLog) {
         subscribeLogRepository.save(subscribeLog);
     }
 

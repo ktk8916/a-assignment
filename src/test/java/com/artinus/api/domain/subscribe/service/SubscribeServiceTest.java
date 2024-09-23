@@ -1,6 +1,6 @@
 package com.artinus.api.domain.subscribe.service;
 
-import com.artinus.api.IntegrationTestSupport;
+import com.artinus.api.SpringBootTestSupport;
 import com.artinus.api.domain.channel.entity.Channel;
 import com.artinus.api.domain.channel.entity.ChannelType;
 import com.artinus.api.domain.member.entity.Member;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Transactional
-class SubscribeServiceTest extends IntegrationTestSupport {
+class SubscribeServiceTest extends SpringBootTestSupport {
 
     @Autowired
     private SubscribeService subscribeService;

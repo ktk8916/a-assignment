@@ -8,15 +8,13 @@ import com.artinus.api.domain.member.value.PhoneNumber;
 import com.artinus.api.domain.subscribe.dto.request.SubscribeRequest;
 import com.artinus.api.domain.subscribe.dto.request.UnsubscribeRequest;
 import com.artinus.api.domain.subscribe.dto.response.SubscribeIdResponse;
-import com.artinus.api.domain.subscribe.dto.response.SubscribeLogResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ChannelSubscribeFacade {
 
     private final MemberService memberService;

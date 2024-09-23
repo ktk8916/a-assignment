@@ -2,12 +2,11 @@ package com.artinus.api.domain.channel.entity;
 
 import com.artinus.api.global.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Channel extends BaseEntity {
@@ -24,12 +23,5 @@ public class Channel extends BaseEntity {
 
     public boolean isUnsubscribeAble () {
         return this.type.isUnsubscribeAble();
-    }
-
-    @Builder
-    private Channel(Long id, String name, ChannelType type) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
     }
 }

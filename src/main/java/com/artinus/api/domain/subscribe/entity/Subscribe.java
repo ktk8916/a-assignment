@@ -5,15 +5,14 @@ import com.artinus.api.domain.member.entity.Member;
 import com.artinus.api.global.BaseEntity;
 import com.artinus.api.global.exception.ArtinusAppException;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static com.artinus.api.global.exception.ExceptionCode.INVALID_SUBSCRIBE_PLAN;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Subscribe extends BaseEntity {
 
@@ -48,13 +47,5 @@ public class Subscribe extends BaseEntity {
             throw new ArtinusAppException(INVALID_SUBSCRIBE_PLAN);
         }
         this.plan = newPlan;
-    }
-
-    @Builder
-    private Subscribe(Long id, SubscribePlan plan, Member member, Channel channel) {
-        this.id = id;
-        this.plan = plan;
-        this.member = member;
-        this.channel = channel;
     }
 }

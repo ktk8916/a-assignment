@@ -1,6 +1,6 @@
 package com.artinus.api.domain.channel.sevice;
 
-import com.artinus.api.IntegrationTestSupport;
+import com.artinus.api.SpringBootTestSupport;
 import com.artinus.api.domain.channel.entity.Channel;
 import com.artinus.api.domain.channel.entity.ChannelType;
 import com.artinus.api.domain.channel.repository.ChannelRepository;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Transactional
-class ChannelServiceTest extends IntegrationTestSupport {
+class ChannelServiceTest extends SpringBootTestSupport {
 
     @Autowired
     private ChannelService channelService;

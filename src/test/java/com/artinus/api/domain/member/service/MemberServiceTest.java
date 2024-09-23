@@ -1,6 +1,6 @@
 package com.artinus.api.domain.member.service;
 
-import com.artinus.api.IntegrationTestSupport;
+import com.artinus.api.SpringBootTestSupport;
 import com.artinus.api.domain.member.entity.Member;
 import com.artinus.api.domain.member.repository.MemberRepository;
 import com.artinus.api.domain.member.value.PhoneNumber;
@@ -9,13 +9,12 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Transactional
-class MemberServiceTest extends IntegrationTestSupport {
+class MemberServiceTest extends SpringBootTestSupport {
 
     @Autowired
     private MemberService memberService;

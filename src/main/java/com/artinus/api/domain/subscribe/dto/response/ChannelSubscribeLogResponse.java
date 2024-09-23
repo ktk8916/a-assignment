@@ -8,16 +8,19 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Builder
-public record SubscribeLogResponse(
-        long ChannelId,
+public record ChannelSubscribeLogResponse(
+        long id,
+        long memberId,
         SubscribeAction action,
         SubscribePlan plan,
         LocalDateTime date
 ) {
-    public static SubscribeLogResponse from(SubscribeLog subscribeLog) {
-        return SubscribeLogResponse.builder()
-                .ChannelId(subscribeLog.getChannelId())
+    public static ChannelSubscribeLogResponse from(SubscribeLog subscribeLog) {
+        return ChannelSubscribeLogResponse.builder()
+                .id(subscribeLog.getId())
+                .memberId(subscribeLog.getMemberId())
                 .action(subscribeLog.getAction())
+                .plan(subscribeLog.getPlan())
                 .date(subscribeLog.getCreatedAt())
                 .build();
     }

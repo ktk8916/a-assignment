@@ -1,18 +1,19 @@
 package com.artinus.api.domain.member.repository;
 
+import com.artinus.api.SpringBootTestSupport;
 import com.artinus.api.domain.member.entity.Member;
 import com.artinus.api.domain.member.value.PhoneNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-class MemberRepositoryTest {
+@Transactional
+class MemberRepositoryTest extends SpringBootTestSupport {
 
     @Autowired
     private MemberRepository memberRepository;

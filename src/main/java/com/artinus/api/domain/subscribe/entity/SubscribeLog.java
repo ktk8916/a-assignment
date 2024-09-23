@@ -4,13 +4,12 @@ import com.artinus.api.domain.channel.entity.Channel;
 import com.artinus.api.domain.member.entity.Member;
 import com.artinus.api.global.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SubscribeLog extends BaseEntity {
 
@@ -56,15 +55,5 @@ public class SubscribeLog extends BaseEntity {
                 .plan(plan)
                 .action(SubscribeAction.UNSUBSCRIBE)
                 .build();
-    }
-
-    @Builder
-    private SubscribeLog(Long id, Subscribe subscribe, Member member, Channel channel, SubscribePlan plan, SubscribeAction action) {
-        this.id = id;
-        this.subscribe = subscribe;
-        this.member = member;
-        this.channel = channel;
-        this.plan = plan;
-        this.action = action;
     }
 }

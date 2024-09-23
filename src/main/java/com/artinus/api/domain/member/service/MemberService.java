@@ -4,7 +4,6 @@ import com.artinus.api.domain.member.entity.Member;
 import com.artinus.api.domain.member.repository.MemberRepository;
 import com.artinus.api.domain.member.value.PhoneNumber;
 import com.artinus.api.global.exception.ArtinusAppException;
-import com.artinus.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
